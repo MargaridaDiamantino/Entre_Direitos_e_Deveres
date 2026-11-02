@@ -114,6 +114,7 @@ function ImportedHeader() {
 }
 
 function ImportedSectionEnviaUmaMensagem() {
+  const [sent, setSent] = useState(false);
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
       <div className="grid gap-8 lg:grid-cols-2">
@@ -160,7 +161,13 @@ function ImportedSectionEnviaUmaMensagem() {
         </div>
         <div className={"rounded-2xl \x62order \x62order-border \x62g-card p-7 \x73hadow-sm"}>
           <h2 className="font-display text-lg font-bold text-primary">Envia uma mensagem</h2>
-          <form className={"mt-5 \x73pace-y-4"}>
+          {sent ? (
+            <div className="mt-6 flex items-start gap-3 rounded-xl bg-gold/15 p-5" role="status">
+              <svg className="mt-0.5 h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              <p className="text-sm font-medium text-foreground">Mensagem enviada! Responderemos o mais rápido possível.</p>
+            </div>
+          ) : (
+          <form className={"mt-5 \x73pace-y-4"} onSubmit={event => { event.preventDefault(); setSent(true); }}>
             <div>
               <label className={"text-xs font-semibold \x74ext-foreground/\x380"} htmlFor="nome">Nome</label>
               <input className={"mt-1.5 w-full rounded-lg \x62order \x62order-input bg-background px-3.5 py-2.5 text-sm \x66ocus:\x6futline-none \x66ocus:\x72ing-2 \x66ocus:\x72ing-ring"} id="nome" required placeholder="O teu nome" />
@@ -175,6 +182,7 @@ function ImportedSectionEnviaUmaMensagem() {
             </div>
             <button className={"inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-gold-foreground transition-colors \x68over:\x62g-gold/\x390"} type="submit"><svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></svg>Enviar</button>
           </form>
+          )}
         </div>
       </div>
     </section>

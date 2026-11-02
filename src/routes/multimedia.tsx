@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/multimedia.css?raw";
 
@@ -114,45 +114,71 @@ function ImportedHeader() {
 }
 
 function ImportedSection() {
+  const [tab, setTab] = useState("video");
+  const TABS: { id: string; label: string; icon: ReactNode }[] = [
+    { id: "video", label: "Vídeos", icon: <><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z" /><circle cx="12" cy="12" r="10" /></> },
+    { id: "image", label: "Imagens", icon: <><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></> },
+    { id: "podcast", label: "Podcast", icon: <><path d="M12 19v3" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><rect x="9" y="2" width="6" height="13" rx="3" /></> },
+    { id: "publication", label: "Publicações", icon: <><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M10 9H8" /><path d="M16 13H8" /><path d="M16 17H8" /></> },
+  ];
+  const MEDIA = [
+    { kind: "video", title: "Direitos das Mulheres em Angola", detail: "24:45", image: "/site-assets/6c288d0b5cf21648.jpg" },
+    { kind: "video", title: "Educação para o futuro", detail: "12:30", image: "/site-assets/d1b55f4f504dbe3a.jpg" },
+    { kind: "video", title: "Igualdade no trabalho", detail: "17:45", image: "/site-assets/3b4a41f5ab18e8bc.jpg" },
+    { kind: "image", title: "Mulheres que inspiram", detail: "Galeria fotográfica", image: "/site-assets/2fc88d88cbbee038.jpg" },
+    { kind: "image", title: "Liderança comunitária", detail: "Galeria fotográfica", image: "/site-assets/34230323d49ce4a7.jpg" },
+    { kind: "image", title: "Infografias educativas", detail: "Série de imagens", image: "/site-assets/podcast-cover.jpg" },
+    { kind: "publication", title: "Constituição da República de Angola — igualdade em resumo", detail: "Publicação · PDF", image: "/site-assets/2fc88d88cbbee038.jpg" },
+    { kind: "publication", title: "Guia rápido: o que fazer quando um direito é violado", detail: "Publicação · PDF", image: "/site-assets/2263a09dfab71c45.jpg" },
+  ];
+  const EPISODES: [number, string, string][] = [
+    [10, "O direito à educação: histórias da sala de aula", "24 min"],
+    [9, "Trabalho e igualdade: mulheres no mercado laboral", "31 min"],
+    [8, "Segurança: falar da violência sem medo", "28 min"],
+  ];
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
       <div className="grid gap-8 lg:grid-cols-[1fr_280px]">
         <div>
           <div className="flex flex-wrap gap-2">
-            <button className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground" type="button"><svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z" /><circle cx="12" cy="12" r="10" /></svg>Vídeos</button>
-            <button className={"inline-flex items-center gap-2 rounded-full \x62order \x62order-border \x62g-card px-5 py-2.5 text-sm font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button"><svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg>Imagens</button>
-            <button className={"inline-flex items-center gap-2 rounded-full \x62order \x62order-border \x62g-card px-5 py-2.5 text-sm font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button"><svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19v3" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><rect x="9" y="2" width="6" height="13" rx="3" /></svg>Podcast</button>
-            <button className={"inline-flex items-center gap-2 rounded-full \x62order \x62order-border \x62g-card px-5 py-2.5 text-sm font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button"><svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M10 9H8" /><path d="M16 13H8" /><path d="M16 17H8" /></svg>Publicações</button>
+            {TABS.map(item => (
+              <button key={item.id} className={tab === item.id ? "inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground" : "inline-flex items-center gap-2 rounded-full \x62order \x62order-border \x62g-card px-5 py-2.5 text-sm font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button" aria-pressed={tab === item.id} onClick={() => setTab(item.id)}><svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{item.icon}</svg>{item.label}</button>
+            ))}
           </div>
+          {tab === "podcast" ? (
+            <div className={"mt-8 overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm"}>
+              <img className="aspect-[16/9] w-full object-cover" src="/site-assets/podcast-cover.jpg" alt="Podcast Vozes de Mulheres" width="1024" height="1024" loading="lazy" />
+              <div className="p-6">
+                <h2 className="font-display text-xl font-bold text-primary">Vozes de Mulheres</h2>
+                <p className="mt-2 text-sm text-muted-foreground">Conversas com mulheres de todo o país sobre direitos, saúde, trabalho e família.</p>
+                <ul className={"mt-5 \x64ivide-y \x64ivide-border"}>
+                  {EPISODES.map(([number, title, duration]) => (
+                    <li key={number} className="flex items-center gap-3 py-3.5">
+                      <svg className="h-7 w-7 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z" /><circle cx="12" cy="12" r="10" /></svg>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium text-foreground">Ep. {number} — {title}</p>
+                        <p className="flex items-center gap-1 text-xs text-muted-foreground"><svg className="h-3 w-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>{duration}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ) : (
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className={"group overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"}>
-              <div className="relative">
-                <img className="aspect-[4/3] w-full object-cover" src="/site-assets/6c288d0b5cf21648.jpg" alt="Direitos das Mulheres em Angola" width="1024" height="1024" loading="lazy" />
-                <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>24:45</span>
-              </div>
-              <div className="p-4">
-                <h3 className="font-display text-sm font-semibold text-primary">Direitos das Mulheres em Angola</h3>
-              </div>
-            </div>
-            <div className={"group overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"}>
-              <div className="relative">
-                <img className="aspect-[4/3] w-full object-cover" src="/site-assets/d1b55f4f504dbe3a.jpg" alt="Educação para o futuro" width="1024" height="1024" loading="lazy" />
-                <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>12:30</span>
-              </div>
-              <div className="p-4">
-                <h3 className="font-display text-sm font-semibold text-primary">Educação para o futuro</h3>
-              </div>
-            </div>
-            <div className={"group overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"}>
-              <div className="relative">
-                <img className="aspect-[4/3] w-full object-cover" src="/site-assets/3b4a41f5ab18e8bc.jpg" alt="Igualdade no trabalho" width="1024" height="1024" loading="lazy" />
-                <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>17:45</span>
-              </div>
-              <div className="p-4">
-                <h3 className="font-display text-sm font-semibold text-primary">Igualdade no trabalho</h3>
-              </div>
-            </div>
+            {MEDIA.filter(item => item.kind === tab).map(item => (
+                <div key={item.title} className={"group overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"}>
+                  <div className="relative">
+                    <img className="aspect-[4/3] w-full object-cover" src={item.image} alt={item.title} width="1024" height="1024" loading="lazy" />
+                    <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>{item.detail}</span>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-display text-sm font-semibold text-primary">{item.title}</h3>
+                  </div>
+                </div>
+            ))}
           </div>
+          )}
         </div>
         <aside>
           <div className={"rounded-2xl \x62order \x62order-border \x62g-secondary p-6"}>
