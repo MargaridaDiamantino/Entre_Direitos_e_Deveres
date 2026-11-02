@@ -114,6 +114,21 @@ function ImportedHeader() {
 }
 
 function ImportedSectionOsTeusDireitos() {
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("Todos");
+  const RIGHTS: [string, string, string][] = [
+    ["Educação", "Direito à Educação", "Toda a mulher e menina tem direito a uma educação de qualidade, sem discriminação, em todos os níveis de ensino."],
+    ["Trabalho", "Direito ao Trabalho", "Igualdade de oportunidades, remuneração justa e condições seguras no emprego, sem discriminação."],
+    ["Saúde", "Direito à Saúde", "Acesso a serviços de saúde de qualidade, incluindo a saúde maternal, sexual e reprodutiva."],
+    ["Segurança", "Direito à Segurança", "Protecção contra todas as formas de violência — física, psicológica ou económica — dentro e fora de casa."],
+    ["Participação Política", "Direito à Participação Política", "Direito de votar, de ser votada e de participar na vida política e comunitária do país."],
+    ["Vida Familiar", "Direito à Vida Familiar", "Casamento livre e igualitário, protecção da maternidade e direitos iguais sobre os bens da família."],
+  ];
+  function isVisible(tag: string, title: string, summary: string) {
+    const term = query.trim().toLowerCase();
+    return (filter === "Todos" || tag === filter) && (!term || title.toLowerCase().includes(term) || summary.toLowerCase().includes(term));
+  }
+  const visibleCount = RIGHTS.filter(([tag, title, summary]) => isVisible(tag, title, summary)).length;
   return (
     <section className="mx-auto max-w-6xl px-4 py-14">
       <div className="mx-auto max-w-2xl">
@@ -122,123 +137,141 @@ function ImportedSectionOsTeusDireitos() {
             <path d="m21 21-4.34-4.34" />
             <circle cx="11" cy="11" r="8" />
           </svg>
-          <input className={"w-full rounded-full \x62order \x62order-input \x62g-card py-3 pl-11 pr-4 text-sm \x73hadow-sm \x66ocus:\x6futline-none \x66ocus:\x72ing-2 \x66ocus:\x72ing-ring"} type="search" placeholder="Pesquisar direito..." defaultValue="" />
+          <input className={"w-full rounded-full \x62order \x62order-input \x62g-card py-3 pl-11 pr-4 text-sm \x73hadow-sm \x66ocus:\x6futline-none \x66ocus:\x72ing-2 \x66ocus:\x72ing-ring"} type="search" placeholder="Pesquisar direito..." value={query} onChange={event => setQuery(event.target.value)} />
         </div>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
-          <button className="rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground" type="button">Todos</button>
-          <button className={"rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button">Educação</button>
-          <button className={"rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button">Trabalho</button>
-          <button className={"rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button">Saúde</button>
-          <button className={"rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button">Segurança</button>
-          <button className={"rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button">Participação Política</button>
-          <button className={"rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button">Vida Familiar</button>
+          <button className={filter === "Todos" ? "rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground" : "rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button" aria-pressed={filter === "Todos"} onClick={() => setFilter("Todos")}>Todos</button>
+          <button className={filter === "Educação" ? "rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground" : "rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button" aria-pressed={filter === "Educação"} onClick={() => setFilter("Educação")}>Educação</button>
+          <button className={filter === "Trabalho" ? "rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground" : "rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button" aria-pressed={filter === "Trabalho"} onClick={() => setFilter("Trabalho")}>Trabalho</button>
+          <button className={filter === "Saúde" ? "rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground" : "rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button" aria-pressed={filter === "Saúde"} onClick={() => setFilter("Saúde")}>Saúde</button>
+          <button className={filter === "Segurança" ? "rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground" : "rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button" aria-pressed={filter === "Segurança"} onClick={() => setFilter("Segurança")}>Segurança</button>
+          <button className={filter === "Participação Política" ? "rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground" : "rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button" aria-pressed={filter === "Participação Política"} onClick={() => setFilter("Participação Política")}>Participação Política</button>
+          <button className={filter === "Vida Familiar" ? "rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground" : "rounded-full \x62order \x62order-border \x62g-card px-4 py-1.5 text-xs font-medium \x74ext-foreground/\x375 transition-colors \x68over:\x62g-secondary"} type="button" aria-pressed={filter === "Vida Familiar"} onClick={() => setFilter("Vida Familiar")}>Vida Familiar</button>
         </div>
       </div>
       <h2 className="section-title mt-12 text-2xl">Os teus direitos</h2>
-      <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/educacao">
-          <div className="relative">
-            <img className="aspect-[16/10] w-full object-cover" src="/site-assets/d1b55f4f504dbe3a.jpg" alt="Direito à Educação" width="1024" height="1024" loading="lazy" />
-            <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Educação</span>
-          </div>
-          <div className="flex flex-1 flex-col p-5">
-            <div className="flex items-center gap-2.5">
-              <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
-                <path d="M22 10v6" />
-                <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-              </svg>
-              <h3 className="font-display text-base font-semibold text-primary">Direito à Educação</h3>
+      {visibleCount === 0 && (
+        <div className={"mt-8 flex flex-col items-center rounded-2xl \x62order \x62order-border \x62g-secondary py-14 text-center"}>
+          <svg className="h-8 w-8 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m13.5 8.5-5 5" /><path d="m8.5 8.5 5 5" /><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+          <p className="mt-3 text-sm text-muted-foreground">Nenhum direito encontrado. Tenta outra pesquisa.</p>
+        </div>
+      )}
+      <div hidden={visibleCount === 0} className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {isVisible("Educação", "Direito à Educação", "Toda a mulher e menina tem direito a uma educação de qualidade, sem discriminação, em todos os níveis de ensino.") && (
+          <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/educacao">
+            <div className="relative">
+              <img className="aspect-[16/10] w-full object-cover" src="/site-assets/d1b55f4f504dbe3a.jpg" alt="Direito à Educação" width="1024" height="1024" loading="lazy" />
+              <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Educação</span>
             </div>
-            <p className="mt-2 flex-1 text-sm text-muted-foreground">Toda a mulher e menina tem direito a uma educação de qualidade, sem discriminação, em todos os níveis de ensino.</p>
-            <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
-          </div>
-        </a>
-        <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/trabalho">
-          <div className="relative">
-            <img className="aspect-[16/10] w-full object-cover" src="/site-assets/3b4a41f5ab18e8bc.jpg" alt="Direito ao Trabalho" width="1024" height="1024" loading="lazy" />
-            <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Trabalho</span>
-          </div>
-          <div className="flex flex-1 flex-col p-5">
-            <div className="flex items-center gap-2.5">
-              <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                <rect width="20" height="14" x="2" y="6" rx="2" />
-              </svg>
-              <h3 className="font-display text-base font-semibold text-primary">Direito ao Trabalho</h3>
+            <div className="flex flex-1 flex-col p-5">
+              <div className="flex items-center gap-2.5">
+                <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+                  <path d="M22 10v6" />
+                  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+                </svg>
+                <h3 className="font-display text-base font-semibold text-primary">Direito à Educação</h3>
+              </div>
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">Toda a mulher e menina tem direito a uma educação de qualidade, sem discriminação, em todos os níveis de ensino.</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
             </div>
-            <p className="mt-2 flex-1 text-sm text-muted-foreground">Igualdade de oportunidades, remuneração justa e condições seguras no emprego, sem discriminação.</p>
-            <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
-          </div>
-        </a>
-        <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/saude">
-          <div className="relative">
-            <img className="aspect-[16/10] w-full object-cover" src="/site-assets/2fc88d88cbbee038.jpg" alt="Direito à Saúde" width="1024" height="1024" loading="lazy" />
-            <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Saúde</span>
-          </div>
-          <div className="flex flex-1 flex-col p-5">
-            <div className="flex items-center gap-2.5">
-              <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
-                <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
-              </svg>
-              <h3 className="font-display text-base font-semibold text-primary">Direito à Saúde</h3>
+          </a>
+        )}
+        {isVisible("Trabalho", "Direito ao Trabalho", "Igualdade de oportunidades, remuneração justa e condições seguras no emprego, sem discriminação.") && (
+          <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/trabalho">
+            <div className="relative">
+              <img className="aspect-[16/10] w-full object-cover" src="/site-assets/3b4a41f5ab18e8bc.jpg" alt="Direito ao Trabalho" width="1024" height="1024" loading="lazy" />
+              <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Trabalho</span>
             </div>
-            <p className="mt-2 flex-1 text-sm text-muted-foreground">Acesso a serviços de saúde de qualidade, incluindo a saúde maternal, sexual e reprodutiva.</p>
-            <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
-          </div>
-        </a>
-        <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/seguranca">
-          <div className="relative">
-            <img className="aspect-[16/10] w-full object-cover" src="/site-assets/34230323d49ce4a7.jpg" alt="Direito à Segurança" width="1024" height="1024" loading="lazy" />
-            <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Segurança</span>
-          </div>
-          <div className="flex flex-1 flex-col p-5">
-            <div className="flex items-center gap-2.5">
-              <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-                <path d="m9 12 2 2 4-4" />
-              </svg>
-              <h3 className="font-display text-base font-semibold text-primary">Direito à Segurança</h3>
+            <div className="flex flex-1 flex-col p-5">
+              <div className="flex items-center gap-2.5">
+                <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  <rect width="20" height="14" x="2" y="6" rx="2" />
+                </svg>
+                <h3 className="font-display text-base font-semibold text-primary">Direito ao Trabalho</h3>
+              </div>
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">Igualdade de oportunidades, remuneração justa e condições seguras no emprego, sem discriminação.</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
             </div>
-            <p className="mt-2 flex-1 text-sm text-muted-foreground">Protecção contra todas as formas de violência — física, psicológica ou económica — dentro e fora de casa.</p>
-            <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
-          </div>
-        </a>
-        <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/participacao-politica">
-          <div className="relative">
-            <img className="aspect-[16/10] w-full object-cover" src="/site-assets/6c288d0b5cf21648.jpg" alt="Direito à Participação Política" width="1024" height="1024" loading="lazy" />
-            <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Participação Política</span>
-          </div>
-          <div className="flex flex-1 flex-col p-5">
-            <div className="flex items-center gap-2.5">
-              <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
-                <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
-                <path d="M8 6v8" />
-              </svg>
-              <h3 className="font-display text-base font-semibold text-primary">Direito à Participação Política</h3>
+          </a>
+        )}
+        {isVisible("Saúde", "Direito à Saúde", "Acesso a serviços de saúde de qualidade, incluindo a saúde maternal, sexual e reprodutiva.") && (
+          <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/saude">
+            <div className="relative">
+              <img className="aspect-[16/10] w-full object-cover" src="/site-assets/2fc88d88cbbee038.jpg" alt="Direito à Saúde" width="1024" height="1024" loading="lazy" />
+              <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Saúde</span>
             </div>
-            <p className="mt-2 flex-1 text-sm text-muted-foreground">Direito de votar, de ser votada e de participar na vida política e comunitária do país.</p>
-            <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
-          </div>
-        </a>
-        <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/vida-familiar">
-          <div className="relative">
-            <img className="aspect-[16/10] w-full object-cover" src="/site-assets/2263a09dfab71c45.jpg" alt="Direito à Vida Familiar" width="1024" height="1024" loading="lazy" />
-            <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Vida Familiar</span>
-          </div>
-          <div className="flex flex-1 flex-col p-5">
-            <div className="flex items-center gap-2.5">
-              <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" />
-              </svg>
-              <h3 className="font-display text-base font-semibold text-primary">Direito à Vida Familiar</h3>
+            <div className="flex flex-1 flex-col p-5">
+              <div className="flex items-center gap-2.5">
+                <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
+                  <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+                </svg>
+                <h3 className="font-display text-base font-semibold text-primary">Direito à Saúde</h3>
+              </div>
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">Acesso a serviços de saúde de qualidade, incluindo a saúde maternal, sexual e reprodutiva.</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
             </div>
-            <p className="mt-2 flex-1 text-sm text-muted-foreground">Casamento livre e igualitário, protecção da maternidade e direitos iguais sobre os bens da família.</p>
-            <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
-          </div>
-        </a>
+          </a>
+        )}
+        {isVisible("Segurança", "Direito à Segurança", "Protecção contra todas as formas de violência — física, psicológica ou económica — dentro e fora de casa.") && (
+          <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/seguranca">
+            <div className="relative">
+              <img className="aspect-[16/10] w-full object-cover" src="/site-assets/34230323d49ce4a7.jpg" alt="Direito à Segurança" width="1024" height="1024" loading="lazy" />
+              <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Segurança</span>
+            </div>
+            <div className="flex flex-1 flex-col p-5">
+              <div className="flex items-center gap-2.5">
+                <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+                <h3 className="font-display text-base font-semibold text-primary">Direito à Segurança</h3>
+              </div>
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">Protecção contra todas as formas de violência — física, psicológica ou económica — dentro e fora de casa.</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
+            </div>
+          </a>
+        )}
+        {isVisible("Participação Política", "Direito à Participação Política", "Direito de votar, de ser votada e de participar na vida política e comunitária do país.") && (
+          <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/participacao-politica">
+            <div className="relative">
+              <img className="aspect-[16/10] w-full object-cover" src="/site-assets/6c288d0b5cf21648.jpg" alt="Direito à Participação Política" width="1024" height="1024" loading="lazy" />
+              <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Participação Política</span>
+            </div>
+            <div className="flex flex-1 flex-col p-5">
+              <div className="flex items-center gap-2.5">
+                <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+                  <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+                  <path d="M8 6v8" />
+                </svg>
+                <h3 className="font-display text-base font-semibold text-primary">Direito à Participação Política</h3>
+              </div>
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">Direito de votar, de ser votada e de participar na vida política e comunitária do país.</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
+            </div>
+          </a>
+        )}
+        {isVisible("Vida Familiar", "Direito à Vida Familiar", "Casamento livre e igualitário, protecção da maternidade e direitos iguais sobre os bens da família.") && (
+          <a className={"group flex flex-col overflow-hidden rounded-2xl \x62order \x62order-border \x62g-card \x73hadow-sm transition-all \x68over:\x2dtranslate-y-1 \x68over:\x73hadow-md"} href="/direitos/vida-familiar">
+            <div className="relative">
+              <img className="aspect-[16/10] w-full object-cover" src="/site-assets/2263a09dfab71c45.jpg" alt="Direito à Vida Familiar" width="1024" height="1024" loading="lazy" />
+              <span className={"absolute bottom-3 left-3 rounded-full \x62g-primary/\x390 px-3 py-1 text-[11px] font-semibold text-primary-foreground"}>Vida Familiar</span>
+            </div>
+            <div className="flex flex-1 flex-col p-5">
+              <div className="flex items-center gap-2.5">
+                <svg className="h-5 w-5 shrink-0 text-magenta" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" />
+                </svg>
+                <h3 className="font-display text-base font-semibold text-primary">Direito à Vida Familiar</h3>
+              </div>
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">Casamento livre e igualitário, protecção da maternidade e direitos iguais sobre os bens da família.</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Saber mais<svg className={"h-4 w-4 transition-transform \x67roup-hover:\x74ranslate-x-1"} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
+            </div>
+          </a>
+        )}
       </div>
       <div className={"mt-16 rounded-3xl \x62g-secondary p-8 md:p-10"}>
         <h2 className="section-title text-2xl">Os teus deveres</h2>
