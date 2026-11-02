@@ -399,13 +399,13 @@ function ImportedSectionTemas() {
   const [finished, setFinished] = useState(false);
   const theme = GAME_THEMES.find(t => t.id === themeId)!;
   const situations = GAME_SITUATIONS.filter(item => item.themeId === themeId);
-  const current = situations[step];
+  const current = (situations[step] ?? situations[0]) as GameSituation;
   const chosen = selected === null ? undefined : current.options[selected];
   function startTheme(id: string) { setThemeId(id); setStep(0); setSelected(null); setScore(0); setFinished(false); }
   function choose(index: number) {
     if (selected !== null) return;
     setSelected(index);
-    if (current.options[index].correct) setScore(value => value + 1);
+    if (current.options[index]?.correct) setScore(value => value + 1);
   }
   function next() {
     if (step + 1 < situations.length) { setStep(step + 1); setSelected(null); } else setFinished(true);
