@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as DireitosRouteImport } from './routes/direitos'
+import { Route as ESeFosseVoceRouteImport } from './routes/e-se-fosse-voce'
+import { Route as HistoriasReaisRouteImport } from './routes/historias-reais'
+import { Route as MultimediaRouteImport } from './routes/multimedia'
+import { Route as QuizRouteImport } from './routes/quiz'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DireitosRoute = DireitosRouteImport.update({
+  id: '/direitos',
+  path: '/direitos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ESeFosseVoceRoute = ESeFosseVoceRouteImport.update({
+  id: '/e-se-fosse-voce',
+  path: '/e-se-fosse-voce',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoriasReaisRoute = HistoriasReaisRouteImport.update({
+  id: '/historias-reais',
+  path: '/historias-reais',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MultimediaRoute = MultimediaRouteImport.update({
+  id: '/multimedia',
+  path: '/multimedia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/direitos': typeof DireitosRoute
+  '/e-se-fosse-voce': typeof ESeFosseVoceRoute
+  '/historias-reais': typeof HistoriasReaisRoute
+  '/multimedia': typeof MultimediaRoute
+  '/quiz': typeof QuizRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/direitos': typeof DireitosRoute
+  '/e-se-fosse-voce': typeof ESeFosseVoceRoute
+  '/historias-reais': typeof HistoriasReaisRoute
+  '/multimedia': typeof MultimediaRoute
+  '/quiz': typeof QuizRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/direitos': typeof DireitosRoute
+  '/e-se-fosse-voce': typeof ESeFosseVoceRoute
+  '/historias-reais': typeof HistoriasReaisRoute
+  '/multimedia': typeof MultimediaRoute
+  '/quiz': typeof QuizRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contacto'
+    | '/direitos'
+    | '/e-se-fosse-voce'
+    | '/historias-reais'
+    | '/multimedia'
+    | '/quiz'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contacto'
+    | '/direitos'
+    | '/e-se-fosse-voce'
+    | '/historias-reais'
+    | '/multimedia'
+    | '/quiz'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacto'
+    | '/direitos'
+    | '/e-se-fosse-voce'
+    | '/historias-reais'
+    | '/multimedia'
+    | '/quiz'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactoRoute: typeof ContactoRoute
+  DireitosRoute: typeof DireitosRoute
+  ESeFosseVoceRoute: typeof ESeFosseVoceRoute
+  HistoriasReaisRoute: typeof HistoriasReaisRoute
+  MultimediaRoute: typeof MultimediaRoute
+  QuizRoute: typeof QuizRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/direitos': {
+      id: '/direitos'
+      path: '/direitos'
+      fullPath: '/direitos'
+      preLoaderRoute: typeof DireitosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/e-se-fosse-voce': {
+      id: '/e-se-fosse-voce'
+      path: '/e-se-fosse-voce'
+      fullPath: '/e-se-fosse-voce'
+      preLoaderRoute: typeof ESeFosseVoceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historias-reais': {
+      id: '/historias-reais'
+      path: '/historias-reais'
+      fullPath: '/historias-reais'
+      preLoaderRoute: typeof HistoriasReaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/multimedia': {
+      id: '/multimedia'
+      path: '/multimedia'
+      fullPath: '/multimedia'
+      preLoaderRoute: typeof MultimediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactoRoute: ContactoRoute,
+  DireitosRoute: DireitosRoute,
+  ESeFosseVoceRoute: ESeFosseVoceRoute,
+  HistoriasReaisRoute: HistoriasReaisRoute,
+  MultimediaRoute: MultimediaRoute,
+  QuizRoute: QuizRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
