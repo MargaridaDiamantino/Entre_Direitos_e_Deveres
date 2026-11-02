@@ -4,7 +4,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/site.css?raw";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [{ title: "Entre Direitos e Deveres — Informar, Educar, Empoderar" }] }),
+  head: () => ({
+    meta: [
+      { title: "Entre Direitos e Deveres — Informar, Educar, Empoderar" },
+      { name: "description", content: "Informa, educa e inspira mulheres e meninas em Angola, promovendo igualdade, respeito e oportunidades para todas." },
+      { property: "og:title", content: "Entre Direitos e Deveres — Informar, Educar, Empoderar" },
+      { property: "og:description", content: "Informa, educa e inspira mulheres e meninas em Angola, promovendo igualdade, respeito e oportunidades para todas." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   staticData: { importedDocument: { html: { "lang": "pt-AO" }, body: {  } } },
   component: Index,
 });
