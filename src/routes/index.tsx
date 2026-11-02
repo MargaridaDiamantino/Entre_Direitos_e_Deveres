@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/site.css?raw";
@@ -20,302 +19,53 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [activeSlide0, setActiveSlide0] = useState(0);
+  const [podcastPerView, setPodcastPerView] = useState(1);
+  useEffect(() => {
+    const md = window.matchMedia("(min-width: 768px)");
+    const lg = window.matchMedia("(min-width: 1024px)");
+    const update = () => setPodcastPerView(lg.matches ? 3 : md.matches ? 2 : 1);
+    update();
+    md.addEventListener("change", update);
+    lg.addEventListener("change", update);
+    return () => { md.removeEventListener("change", update); lg.removeEventListener("change", update); };
+  }, []);
+  const podcastEpisodes: [number, string, string][] = [
+    [10, "O direito à educação: histórias da sala de aula", "24 min"],
+    [9, "Trabalho e igualdade: mulheres no mercado laboral", "31 min"],
+    [8, "Segurança: falar da violência sem medo", "28 min"],
+  ];
+  const podcastMaxSlide = Math.max(0, podcastEpisodes.length - podcastPerView);
+  const podcastSlide = Math.min(activeSlide0, podcastMaxSlide);
   const carouselContent0 = (<>
-{activeSlide0 === 0 && <Fragment key={0}>
 <div className="overflow-hidden">
-  <div className="flex -ml-4" style={{ transform: "translate3d(0px, 0px, 0px)" }}>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(0px, 0px, 0px)" }} role="group" aria-roledescription="slide">
+  <div className="flex -ml-4 transition-transform duration-500 ease-in-out" style={{ transform: `translate3d(-${podcastSlide * (100 / podcastPerView)}%, 0px, 0px)` }}>
+    {podcastEpisodes.map(([number, title, duration]) => (
+    <div key={number} className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2 lg:basis-1/3" role="group" aria-roledescription="slide">
       <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
         <div className="relative">
           <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 10</span>
+          <span className="absolute bottom-3 left-3 rounded-md bg-gold px-2.5 py-1 text-[11px] font-bold text-gold-foreground">EPISÓDIO {number}</span>
         </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>24 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">O direito à educação: histórias da sala de aula</h3>
+        <div className="flex min-h-36 flex-col p-4">
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>{duration}</p>
+          <h3 className="mt-2 flex-1 font-display text-base font-semibold text-primary">{title}</h3>
           <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
         </div>
       </article>
     </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(0px, 0px, 0px)" }} role="group" aria-roledescription="slide" data-site-import-responsive="226">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 9</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>31 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Trabalho e igualdade: mulheres no mercado laboral</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 8</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>28 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Segurança: falar da violência sem medo</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
+    ))}
   </div>
 </div>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 left-auto right-14 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + -1 + 5) % 5); }} aria-label="Podcast anterior" title="Podcast anterior">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="m12 19-7-7 7-7" />
-    <path d="M19 12H5" />
-  </svg>
+{podcastMaxSlide > 0 && (<>
+<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 left-auto right-14 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={() => setActiveSlide0(Math.max(0, podcastSlide - 1))} disabled={podcastSlide === 0} aria-label="Podcast anterior" title="Podcast anterior" type="button">
+  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
   <span className={"\x73r-only"}>Previous slide</span>
 </button>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 right-0 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + 1 + 5) % 5); }} aria-label="Podcast seguinte" title="Podcast seguinte">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
-  </svg>
+<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 right-0 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={() => setActiveSlide0(Math.min(podcastMaxSlide, podcastSlide + 1))} disabled={podcastSlide === podcastMaxSlide} aria-label="Podcast seguinte" title="Podcast seguinte" type="button">
+  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
   <span className={"\x73r-only"}>Next slide</span>
 </button>
-</Fragment>}
-{activeSlide0 === 1 && <Fragment key={1}>
-<div className="overflow-hidden">
-  <div className="flex -ml-4" style={{ transform: "translate3d(-567.97px, 0px, 0px)" }}>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(0px, 0px, 0px)" }} role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 10</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>24 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">O direito à educação: histórias da sala de aula</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(0px, 0px, 0px)" }} role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 9</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>31 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Trabalho e igualdade: mulheres no mercado laboral</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 8</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>28 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Segurança: falar da violência sem medo</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-  </div>
-</div>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 left-auto right-14 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + -1 + 5) % 5); }} aria-label="Podcast anterior" title="Podcast anterior">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="m12 19-7-7 7-7" />
-    <path d="M19 12H5" />
-  </svg>
-  <span className={"\x73r-only"}>Previous slide</span>
-</button>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 right-0 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + 1 + 5) % 5); }} aria-label="Podcast seguinte" title="Podcast seguinte">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
-  </svg>
-  <span className={"\x73r-only"}>Next slide</span>
-</button>
-</Fragment>}
-{activeSlide0 === 2 && <Fragment key={2}>
-<div className="overflow-hidden">
-  <div className="flex -ml-4" style={{ transform: "translate3d(-1135.96px, 0px, 0px)" }}>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(1704px, 0px, 0px)" }} role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 10</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>24 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">O direito à educação: histórias da sala de aula</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(0px, 0px, 0px)" }} role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 9</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>31 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Trabalho e igualdade: mulheres no mercado laboral</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 8</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>28 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Segurança: falar da violência sem medo</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-  </div>
-</div>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 left-auto right-14 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + -1 + 5) % 5); }} aria-label="Podcast anterior" title="Podcast anterior">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="m12 19-7-7 7-7" />
-    <path d="M19 12H5" />
-  </svg>
-  <span className={"\x73r-only"}>Previous slide</span>
-</button>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 right-0 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + 1 + 5) % 5); }} aria-label="Podcast seguinte" title="Podcast seguinte">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
-  </svg>
-  <span className={"\x73r-only"}>Next slide</span>
-</button>
-</Fragment>}
-{activeSlide0 === 3 && <Fragment key={3}>
-<div className="overflow-hidden">
-  <div className="flex -ml-4" style={{ transform: "translate3d(0.04px, 0px, 0px)" }}>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(0px, 0px, 0px)" }} role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 10</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>24 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">O direito à educação: histórias da sala de aula</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(0px, 0px, 0px)" }} role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 9</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>31 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Trabalho e igualdade: mulheres no mercado laboral</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 8</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>28 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Segurança: falar da violência sem medo</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-  </div>
-</div>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 left-auto right-14 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + -1 + 5) % 5); }} aria-label="Podcast anterior" title="Podcast anterior">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="m12 19-7-7 7-7" />
-    <path d="M19 12H5" />
-  </svg>
-  <span className={"\x73r-only"}>Previous slide</span>
-</button>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 right-0 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + 1 + 5) % 5); }} aria-label="Podcast seguinte" title="Podcast seguinte">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
-  </svg>
-  <span className={"\x73r-only"}>Next slide</span>
-</button>
-</Fragment>}
-{activeSlide0 === 4 && <Fragment key={4}>
-<div className="overflow-hidden">
-  <div className="flex -ml-4" style={{ transform: "translate3d(-567.96px, 0px, 0px)" }}>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(0px, 0px, 0px)" }} role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 10</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>24 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">O direito à educação: histórias da sala de aula</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" style={{ transform: "translate3d(0px, 0px, 0px)" }} role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 9</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>31 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Trabalho e igualdade: mulheres no mercado laboral</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-    <div className="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2" role="group" aria-roledescription="slide">
-      <article className={"h-full overflow-hidden rounded-lg \x62g-card text-card-foreground"}>
-        <div className="relative">
-          <img className="aspect-[16/9] w-full object-cover" src="/site-assets/56c09146c9af2e06.jpg" alt="Microfone e auscultadores no estúdio do podcast" width="1536" height="1024" loading="lazy" />
-          <span className="absolute bottom-4 left-4 rounded-md bg-gold px-3 py-1.5 text-xs font-bold text-gold-foreground">EPISÓDIO 8</span>
-        </div>
-        <div className="flex min-h-48 flex-col p-6">
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><svg className="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>28 min</p>
-          <h3 className="mt-3 flex-1 font-display text-lg font-semibold text-primary">Segurança: falar da violência sem medo</h3>
-          <a className={"inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x75nderline-offset-4 \x68over:\x75nderline h-9 mt-4 justify-start self-start p-0 text-magenta"} href="/multimedia">Ver episódio <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
-        </div>
-      </article>
-    </div>
-  </div>
-</div>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 left-auto right-14 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + -1 + 5) % 5); }} aria-label="Podcast anterior" title="Podcast anterior">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="m12 19-7-7 7-7" />
-    <path d="M19 12H5" />
-  </svg>
-  <span className={"\x73r-only"}>Previous slide</span>
-</button>
-<button className={"inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x62order \x73hadow-sm absolute rounded-full bottom-0 right-0 top-auto h-10 w-10 \x74ranslate-y-0 \x62order-primary-foreground/\x330 bg-transparent text-primary-foreground \x68over:\x62g-primary-foreground hover:text-primary"} onClick={event => { event.preventDefault(); event.stopPropagation(); setActiveSlide0(index => (index + 1 + 5) % 5); }} aria-label="Podcast seguinte" title="Podcast seguinte">
-  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
-  </svg>
-  <span className={"\x73r-only"}>Next slide</span>
-</button>
-</Fragment>}
+</>)}
 </>);
   return (
     <>
@@ -355,7 +105,7 @@ function Index() {
                 </div>
                 <a className={"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors \x66ocus-visible:\x6futline-none \x66ocus-visible:\x72ing-1 \x66ocus-visible:\x72ing-ring \x64isabled:\x70ointer-events-none disabled:opacity-50 \x64isabled:\x63ursor-not-allowed [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73ize-4 [&\x5fsvg]:\x73hrink-0 \x73hadow h-9 px-4 py-2 bg-gold text-gold-foreground \x68over:\x62g-gold/\x390"} href="/multimedia">Todos os episódios <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
               </div>
-              <div className="relative mt-8 pb-16" role="region" aria-roledescription="carousel" aria-label="Episódios do podcast" data-site-import-carousel-root="0">{carouselContent0}</div>
+              <div className={podcastMaxSlide > 0 ? "relative mt-8 pb-16" : "relative mt-8"} role="region" aria-roledescription="carousel" aria-label="Episódios do podcast" data-site-import-carousel-root="0">{carouselContent0}</div>
             </div>
           </section>
         </main>
@@ -625,7 +375,7 @@ function ImportedFooter() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-footer text-footer-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3">
         <div>
           <div className="flex items-center gap-3">

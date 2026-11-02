@@ -170,6 +170,72 @@ const GAME_SITUATIONS: GameSituation[] = [
     ]
   },
   {
+    "id": "edu-3",
+    "themeId": "educacao",
+    "situation": "E se fosse você? Luísa engravidou aos 16 anos e a escola diz que ela já não pode frequentar as aulas.",
+    "options": [
+      {
+        "text": "Desistir da escola, porque agora tem de cuidar do bebé.",
+        "correct": false,
+        "feedback": "Ser mãe não tira o direito de estudar. Luísa pode e deve continuar os estudos."
+      },
+      {
+        "text": "Mudar-se para o curso nocturno sem perguntar nada.",
+        "correct": false,
+        "feedback": "Pode ser uma opção, mas só se for escolha dela — ninguém a pode afastar das aulas por estar grávida."
+      },
+      {
+        "text": "Exigir continuar na escola — nenhuma aluna pode ser expulsa por estar grávida.",
+        "correct": true,
+        "feedback": "Certo! A gravidez não pode ser motivo de exclusão: o direito à educação mantém-se, e a escola deve apoiar Luísa."
+      }
+    ]
+  },
+  {
+    "id": "edu-4",
+    "themeId": "educacao",
+    "situation": "E se fosse você? A família de Rosa só tem dinheiro para pagar os estudos de um filho e decide que deve ser o irmão, por ser rapaz.",
+    "options": [
+      {
+        "text": "Conversar com a família e procurar bolsas ou apoios — rapazes e raparigas têm o mesmo direito à educação.",
+        "correct": true,
+        "feedback": "Certo! A educação das raparigas vale tanto quanto a dos rapazes, e existem bolsas e programas de apoio que podem ajudar."
+      },
+      {
+        "text": "Aceitar, porque os rapazes é que vão sustentar a família.",
+        "correct": false,
+        "feedback": "Esta ideia prende as raparigas à pobreza. Uma mulher com estudos também sustenta e transforma a família."
+      },
+      {
+        "text": "Deixar de estudar e ir trabalhar para pagar os estudos do irmão.",
+        "correct": false,
+        "feedback": "O sacrifício de Rosa não é justo: o futuro dela conta tanto como o do irmão."
+      }
+    ]
+  },
+  {
+    "id": "edu-5",
+    "themeId": "educacao",
+    "situation": "E se fosse você? Um professor promete boas notas a Carla em troca de favores sexuais.",
+    "options": [
+      {
+        "text": "Aceitar para não reprovar.",
+        "correct": false,
+        "feedback": "Nunca. Isto é assédio e abuso de poder — a culpa é só do professor."
+      },
+      {
+        "text": "Ficar calada e mudar de escola.",
+        "correct": false,
+        "feedback": "Fugir deixa o professor livre para fazer o mesmo a outras alunas."
+      },
+      {
+        "text": "Denunciar à direcção da escola, aos pais ou às autoridades — é assédio e é crime.",
+        "correct": true,
+        "feedback": "Certo! Nenhuma nota vale a tua dignidade. Denunciar protege Carla e as colegas."
+      }
+    ]
+  },
+  {
     "id": "trab-1",
     "themeId": "trabalho",
     "situation": "E se fosse você? Esmeralda está grávida e a empresa despede-a assim que a chefe descobre.",
@@ -210,6 +276,72 @@ const GAME_SITUATIONS: GameSituation[] = [
         "text": "Pedir apenas mais horas extras para compensar.",
         "correct": false,
         "feedback": "Isso não corrige a injustiça: o que deve mudar é o salário, não a carga de trabalho."
+      }
+    ]
+  },
+  {
+    "id": "trab-3",
+    "themeId": "trabalho",
+    "situation": "E se fosse você? Num anúncio de emprego, a empresa exige que as candidatas apresentem um teste de gravidez.",
+    "options": [
+      {
+        "text": "Fazer o teste para não perder a oportunidade.",
+        "correct": false,
+        "feedback": "Exigir um teste de gravidez para contratar é discriminação e não deve ser aceite."
+      },
+      {
+        "text": "Recusar e denunciar à inspecção do trabalho — a gravidez não pode ser critério de contratação.",
+        "correct": true,
+        "feedback": "Certo! A lei proíbe a discriminação no acesso ao emprego, e a gravidez nunca pode ser motivo para não contratar."
+      },
+      {
+        "text": "Desistir da vaga sem dizer nada.",
+        "correct": false,
+        "feedback": "Calar deixa a empresa continuar a discriminar outras mulheres."
+      }
+    ]
+  },
+  {
+    "id": "trab-4",
+    "themeId": "trabalho",
+    "situation": "E se fosse você? Paula trabalha como empregada doméstica há três anos, sem contrato, sem folgas e sem salário certo.",
+    "options": [
+      {
+        "text": "Aceitar, porque o trabalho doméstico «não é trabalho a sério».",
+        "correct": false,
+        "feedback": "É trabalho a sério. O trabalho doméstico tem direitos como qualquer outro."
+      },
+      {
+        "text": "Sair sem reclamar nada.",
+        "correct": false,
+        "feedback": "Paula pode e deve reclamar o que lhe é devido."
+      },
+      {
+        "text": "Informar-se e exigir os seus direitos — o trabalho doméstico também tem direito a contrato, descanso e salário.",
+        "correct": true,
+        "feedback": "Certo! As trabalhadoras domésticas têm direito a contrato, salário justo, descanso e férias."
+      }
+    ]
+  },
+  {
+    "id": "trab-5",
+    "themeId": "trabalho",
+    "situation": "E se fosse você? O chefe de Isabel faz comentários sobre o corpo dela todos os dias e diz que, se ela reclamar, perde o emprego.",
+    "options": [
+      {
+        "text": "Registar o que acontece e denunciar à direcção ou à inspecção do trabalho — o assédio no trabalho é proibido.",
+        "correct": true,
+        "feedback": "Certo! Ninguém tem de suportar assédio para manter o emprego. Guardar provas e procurar apoio é o caminho."
+      },
+      {
+        "text": "Rir dos comentários para evitar problemas.",
+        "correct": false,
+        "feedback": "Ignorar não faz o assédio parar e pode até piorar a situação."
+      },
+      {
+        "text": "Despedir-se sem contar a ninguém.",
+        "correct": false,
+        "feedback": "Isabel não deve perder o emprego por causa do comportamento do chefe."
       }
     ]
   },
@@ -258,6 +390,72 @@ const GAME_SITUATIONS: GameSituation[] = [
     ]
   },
   {
+    "id": "sau-3",
+    "themeId": "saude",
+    "situation": "E se fosse você? Teresa está grávida de quatro meses e ainda não foi a nenhuma consulta porque se sente bem.",
+    "options": [
+      {
+        "text": "Esperar até sentir alguma dor.",
+        "correct": false,
+        "feedback": "Muitos problemas na gravidez não dão sinais. Esperar pode pôr em risco a mãe e o bebé."
+      },
+      {
+        "text": "Ir ao centro de saúde fazer as consultas pré-natais — são um direito e protegem a mãe e o bebé.",
+        "correct": true,
+        "feedback": "Certo! As consultas pré-natais ajudam a prevenir complicações e são um direito de todas as grávidas."
+      },
+      {
+        "text": "Seguir só os conselhos das vizinhas.",
+        "correct": false,
+        "feedback": "Os conselhos ajudam, mas não substituem o acompanhamento de um profissional de saúde."
+      }
+    ]
+  },
+  {
+    "id": "sau-4",
+    "themeId": "saude",
+    "situation": "E se fosse você? No hospital, uma enfermeira grita com Maria e conta a outras pessoas o diagnóstico dela.",
+    "options": [
+      {
+        "text": "Calar-se, porque precisa do atendimento.",
+        "correct": false,
+        "feedback": "Precisar de cuidados não obriga ninguém a aceitar maus-tratos."
+      },
+      {
+        "text": "Nunca mais voltar ao hospital.",
+        "correct": false,
+        "feedback": "Abandonar o tratamento põe a saúde de Maria em risco."
+      },
+      {
+        "text": "Apresentar queixa à direcção do hospital — todas as doentes têm direito a respeito e confidencialidade.",
+        "correct": true,
+        "feedback": "Certo! O atendimento deve ser digno, e a informação sobre a saúde de cada pessoa é confidencial."
+      }
+    ]
+  },
+  {
+    "id": "sau-5",
+    "themeId": "saude",
+    "situation": "E se fosse você? O marido de Ana proíbe-a de usar métodos contraceptivos e de ir às consultas de planeamento familiar.",
+    "options": [
+      {
+        "text": "Procurar o centro de saúde — a decisão sobre o próprio corpo e a saúde reprodutiva é dela.",
+        "correct": true,
+        "feedback": "Certo! Cada mulher tem o direito de decidir sobre o seu corpo e de aceder ao planeamento familiar."
+      },
+      {
+        "text": "Obedecer, porque o marido é o chefe da família.",
+        "correct": false,
+        "feedback": "No casamento, marido e mulher têm direitos iguais. Ninguém decide pelo corpo de Ana."
+      },
+      {
+        "text": "Usar remédios caseiros às escondidas.",
+        "correct": false,
+        "feedback": "Métodos sem orientação médica podem ser perigosos. O melhor é procurar um profissional de saúde."
+      }
+    ]
+  },
+  {
     "id": "seg-1",
     "themeId": "seguranca",
     "situation": "E se fosse você? O marido de Domingas agride-a. Ela tem medo de denunciar porque «é assunto de casa».",
@@ -298,6 +496,72 @@ const GAME_SITUATIONS: GameSituation[] = [
         "text": "Dizer às raparigas que elas é que provocam.",
         "correct": false,
         "feedback": "A vítima nunca é culpada. Quem comete o assédio é o único responsável."
+      }
+    ]
+  },
+  {
+    "id": "seg-3",
+    "themeId": "seguranca",
+    "situation": "E se fosse você? O namorado de Joana controla o telemóvel dela, proíbe-a de ver as amigas e diz que é por amor.",
+    "options": [
+      {
+        "text": "Aceitar, porque é prova de que ele gosta dela.",
+        "correct": false,
+        "feedback": "Ciúme e controlo não são amor. São sinais de violência psicológica."
+      },
+      {
+        "text": "Reconhecer que é violência psicológica e procurar apoio de pessoas de confiança ou de uma organização.",
+        "correct": true,
+        "feedback": "Certo! O controlo é uma forma de violência. Joana tem direito à liberdade e a uma relação saudável."
+      },
+      {
+        "text": "Afastar-se das amigas para evitar discussões.",
+        "correct": false,
+        "feedback": "Isolar-se é exactamente o que o controlo procura. Joana precisa de apoio, não de ficar sozinha."
+      }
+    ]
+  },
+  {
+    "id": "seg-4",
+    "themeId": "seguranca",
+    "situation": "E se fosse você? A vizinha de Helena é agredida pelo marido quase todas as noites. Helena ouve tudo.",
+    "options": [
+      {
+        "text": "Não se meter, porque «entre marido e mulher ninguém mete a colher».",
+        "correct": false,
+        "feedback": "A violência doméstica é crime público: qualquer pessoa pode e deve denunciar."
+      },
+      {
+        "text": "Ir falar sozinha com o marido para ele parar.",
+        "correct": false,
+        "feedback": "Confrontar o agressor sozinha pode ser perigoso para Helena e para a vizinha."
+      },
+      {
+        "text": "Denunciar à polícia — a violência doméstica é crime público e qualquer pessoa pode fazer a queixa.",
+        "correct": true,
+        "feedback": "Certo! Em Angola, a violência doméstica é crime público. Denunciar pode salvar uma vida."
+      }
+    ]
+  },
+  {
+    "id": "seg-5",
+    "themeId": "seguranca",
+    "situation": "E se fosse você? Alguém oferece a Sofia um emprego bem pago noutro país, mas pede-lhe o passaporte e diz para não contar à família.",
+    "options": [
+      {
+        "text": "Desconfiar, não entregar os documentos e pedir ajuda às autoridades — pode ser tráfico de pessoas.",
+        "correct": true,
+        "feedback": "Certo! Pedir documentos e segredo são sinais de alerta de tráfico de pessoas. Nunca entregues o teu passaporte."
+      },
+      {
+        "text": "Aceitar logo, porque é uma oportunidade única.",
+        "correct": false,
+        "feedback": "Ofertas boas demais e cheias de segredos são muitas vezes armadilhas de tráfico."
+      },
+      {
+        "text": "Ir, mas avisar a família só quando chegar.",
+        "correct": false,
+        "feedback": "Quando chegar pode ser tarde. A família e as autoridades devem saber antes."
       }
     ]
   },
@@ -346,6 +610,72 @@ const GAME_SITUATIONS: GameSituation[] = [
     ]
   },
   {
+    "id": "par-3",
+    "themeId": "participacao",
+    "situation": "E se fosse você? Na reunião do bairro só os homens falam, e as propostas das mulheres nunca são ouvidas.",
+    "options": [
+      {
+        "text": "Deixar de ir às reuniões.",
+        "correct": false,
+        "feedback": "Sem as mulheres, as decisões continuam a ser tomadas sem elas."
+      },
+      {
+        "text": "Organizar as mulheres do bairro para apresentarem juntas as suas propostas.",
+        "correct": true,
+        "feedback": "Certo! Juntas, as vozes ganham força — e as mulheres têm o mesmo direito de participar nas decisões."
+      },
+      {
+        "text": "Pedir ao marido que fale por ela.",
+        "correct": false,
+        "feedback": "A voz dela é dela. Ninguém precisa de intermediário para participar."
+      }
+    ]
+  },
+  {
+    "id": "par-4",
+    "themeId": "participacao",
+    "situation": "E se fosse você? Laura fez 18 anos e não sabe se pode ir votar sem autorização do pai.",
+    "options": [
+      {
+        "text": "Esperar que o pai a autorize.",
+        "correct": false,
+        "feedback": "Laura não precisa de autorização: aos 18 anos, votar é um direito próprio."
+      },
+      {
+        "text": "Não votar, porque «uma rapariga não precisa de votar».",
+        "correct": false,
+        "feedback": "Votar é um direito de todas as cidadãs maiores de 18 anos."
+      },
+      {
+        "text": "Ir votar — a partir dos 18 anos, o voto é um direito pessoal que não depende de ninguém.",
+        "correct": true,
+        "feedback": "Certo! Cada cidadã maior de idade pode votar livremente, sem pedir autorização a ninguém."
+      }
+    ]
+  },
+  {
+    "id": "par-5",
+    "themeId": "participacao",
+    "situation": "E se fosse você? Um líder local diz que as mulheres que votarem «no partido errado» vão perder a ajuda alimentar.",
+    "options": [
+      {
+        "text": "Votar livremente e denunciar a ameaça — o voto é secreto e ninguém pode ser punido pela sua escolha.",
+        "correct": true,
+        "feedback": "Certo! O voto é livre e secreto. Ameaçar eleitores é crime e deve ser denunciado."
+      },
+      {
+        "text": "Votar como o líder manda, por medo.",
+        "correct": false,
+        "feedback": "O medo é o que a ameaça procura. O voto é secreto: ninguém sabe em quem votas."
+      },
+      {
+        "text": "Não votar para evitar problemas.",
+        "correct": false,
+        "feedback": "Abdicar do voto é dar razão a quem ameaça."
+      }
+    ]
+  },
+  {
     "id": "fam-1",
     "themeId": "familia",
     "situation": "E se fosse você? Quando o marido de Célia morre, os irmãos dele querem ficar com a casa e os bens do casal.",
@@ -386,6 +716,72 @@ const GAME_SITUATIONS: GameSituation[] = [
         "text": "Propor que a mãe só volte a ver a filha quando aceitar.",
         "correct": false,
         "feedback": "Isso é violência: afastar a mãe da filha é ilegal."
+      }
+    ]
+  },
+  {
+    "id": "fam-3",
+    "themeId": "familia",
+    "situation": "E se fosse você? O pai do filho de Marta deixou de pagar a pensão de alimentos e diz que «não tem obrigação».",
+    "options": [
+      {
+        "text": "Desistir e sustentar o filho sozinha.",
+        "correct": false,
+        "feedback": "O pai tem o dever legal de contribuir para o sustento do filho."
+      },
+      {
+        "text": "Pedir ajuda ao tribunal — o pai tem a obrigação legal de contribuir para o sustento do filho.",
+        "correct": true,
+        "feedback": "Certo! O Código da Família obriga ambos os pais a sustentar os filhos, e o tribunal pode obrigar ao pagamento."
+      },
+      {
+        "text": "Impedir o pai de ver o filho até ele pagar.",
+        "correct": false,
+        "feedback": "O direito da criança a conviver com o pai não deve ser usado como castigo."
+      }
+    ]
+  },
+  {
+    "id": "fam-4",
+    "themeId": "familia",
+    "situation": "E se fosse você? Joana quer casar com quem escolheu, mas a família quer obrigá-la a casar com outro homem.",
+    "options": [
+      {
+        "text": "Recusar — o casamento exige o consentimento livre dos dois noivos.",
+        "correct": true,
+        "feedback": "Certo! O Código da Família exige o livre consentimento: ninguém pode ser obrigado a casar."
+      },
+      {
+        "text": "Aceitar o casamento escolhido pela família.",
+        "correct": false,
+        "feedback": "Um casamento sem o consentimento livre de Joana não é aceitável."
+      },
+      {
+        "text": "Fugir de casa sem pedir ajuda a ninguém.",
+        "correct": false,
+        "feedback": "Fugir sozinha pode ser perigoso. Há pessoas e instituições que podem ajudar."
+      }
+    ]
+  },
+  {
+    "id": "fam-5",
+    "themeId": "familia",
+    "situation": "E se fosse você? Depois do divórcio, o ex-marido de Graça diz que ela não tem direito a nada porque «a casa está no nome dele».",
+    "options": [
+      {
+        "text": "Sair de casa sem nada.",
+        "correct": false,
+        "feedback": "Graça não perde os seus direitos só porque o registo está no nome dele."
+      },
+      {
+        "text": "Aceitar só o que ele quiser dar.",
+        "correct": false,
+        "feedback": "Os bens do casal não dependem da boa vontade dele."
+      },
+      {
+        "text": "Procurar apoio jurídico — os bens adquiridos durante o casamento pertencem aos dois.",
+        "correct": true,
+        "feedback": "Certo! Os bens comprados durante o casamento são de ambos, mesmo que estejam registados no nome de um só."
       }
     ]
   }
@@ -497,7 +893,7 @@ function ImportedFooter() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-footer text-footer-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3">
         <div>
           <div className="flex items-center gap-3">
