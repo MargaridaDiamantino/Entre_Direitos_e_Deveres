@@ -1,4 +1,4 @@
-# Green Cream Curiosity Club
+# Entre Direitos e Deveres
 
 Imported website: https://green-cream-curiosity-club.lovable.app/
 
